@@ -1,0 +1,100 @@
+@font-face
+  font-family: 'hack'
+  src: url('static/hack_reg_nerdfont_complete.ttf') format("truetype")
+
+body
+  background: black
+  margin: 0
+  color: white
+  font-family: 'hack'
+
+button
+  background: black
+  color: white
+  width: 40px
+  height: 40px
+  font-size: 24px
+  font-family: 'hack'
+  border: solid 1px white
+  border-radius: 5px
+  margin: 5px
+
+  &:hover
+    color: lightblue
+    border-color: lightblue
+
+  & > i
+    font-style: normal
+    margin-left: -5px
+
+.block
+  display: none
+  width: 330px
+  height: calc(100vh - 55px)
+  margin: auto
+  flex-direction: column
+
+  .inblock
+    text-align: center
+
+    &.full
+      flex-grow: 2
+
+    &.title
+      margin: 5px auto
+      font-size: 18px
+      text-decoration: underline
+
+    label
+      display: inline-block
+      margin-top: 12px
+      margin-bottom: 7px
+
+  .menu
+    text-align: center
+    height: 45px
+    margin: 5px auto
+
+.btn-inactive
+  color: darkslategray
+  border-color: darkslategray
+
+  &:hover
+    color: darkslategray
+    border-color: darkslategray
+
+.radios
+  text-align: left
+  width: fit-content
+  margin: auto
+
+  input
+    margin-right: 7px
+
+  label
+    margin: 4px auto !important
+
+#gs-nols
+  margin: auto
+  width: 300px
+
+.btn-large
+  width: 180px
+
+#gs-title
+  margin: 0 auto
+  margin-top: 5px
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 45px
+
+  img
+    width: 50px
+    height: 50px
+    margin: 10px
+
+  span
+    font-size: 24px
+    font-weight: bold
+
