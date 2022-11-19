@@ -1,3 +1,11 @@
+export createElt = (tag, attrs, txt, html) ->
+  elt = document.createElement tag
+  afn = ([k, v]) -> elt.setAttribute(k, v)
+  afn(attr) for attr in attrs
+  if txt? then elt.innerText = txt
+  else if html? then elt.innerHTML = html
+  elt
+
 export date2text = (dt) ->
   y = dt.getFullYear() - 2000
   d = dt.getDate()
@@ -7,6 +15,20 @@ export date2text = (dt) ->
   "#{m}#{d}#{y}"
 
 export default getId = (id) -> document.getElementById id
+
+export LS =
+  check: ->
+    tryit = 'try_lstest'
+    try
+      localStorage.setItem tryit, tryit
+      localStorage.getItem tryit
+      localStorage.removeItem tryit
+      true
+    catch
+      false
+  get: (key) -> localStorage.getItem "gs-#{key}"
+  prop: (prop) -> localStorage.hasOwnProperty "gs-#{prop}"
+  set: (key, value) -> localStorage.setItem "gs-#{key}", value
 
 export setDisplay = (id, chx) ->
   elt = getId id

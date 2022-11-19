@@ -1,12 +1,26 @@
 import getId, * as U from './utils.coffee'
 
-export default GSMain =
+export GSCount =
+  act: (action) ->
+    #
+    # TODO
+    #
+    console.log 'not ready'
+    #
+  prepare: ->
+    #
+    # TODO
+    #
+    console.log 'not ready'
+    #
+
+export GSMain =
   add_active: false,
   left_active: false,
   right_active: false,
   act: (action) ->
     switch action
-      when 'add' then if GS.main.add_active then GS.show 'add'
+      when 'add' then if GS.main.add_active then GS.swift 'main', 'add'
       when 'curbs' then GS.show 'curbs'
       when 'left' then if GS.main.left_active then GS.main.move 'left'
       when 'prefs' then GS.show 'prefs'
