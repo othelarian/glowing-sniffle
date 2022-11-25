@@ -1,0 +1,52 @@
+- var verb = (form_name == 'create')? 'Créer' : 'Modifier';
+.block(id="gs-"+form_name)
+  .inblock.title #{verb} un exercice
+  .inblock.full
+    if form_name == 'modex'
+      div Exercice à modifier :
+      .line-m
+        i#gs-modex-seltype.icon ??
+        label#gs-modex-oldname ??
+      hr
+      div
+        label(for='gs-modex-name') Nouveau nom :
+    else
+      label(for='gs-create-name') Nom du nouvel exercice :
+    input(
+      id="gs-"+form_name+"-name"
+      maxlength=22
+      size=25
+      oninput='GS.'+form_name+'.act("update")'
+    )
+    .error(id="gs-"+form_name+"-errdup") Ce nom est déjà pris
+    .radios(id='gs-'+form_name+'-radios')
+      label Type d'exercice :
+      br
+      input(
+        id='gs-'+form_name+'-type-rep'
+        name='gs-'+form_name+'-type'
+        type='radio'
+        onclick='GS.'+form_name+'.act("type")'
+        checked
+      )
+      label(for='gs-'+form_name+'-type-rep')
+        i &#xf698;
+        span répétition
+      br
+      input(
+        id='gs-'+form_name+'-type-time'
+        name='gs-'+form_name+'-type'
+        type='radio'
+        onclick='GS.'+form_name+'.act("type")'
+      )
+      label(for='gs-'+form_name+'-type-time')
+        i &#xfa1a;
+        span temps
+    .menu
+      button(onclick="GS."+form_name+".act('back')")
+        i &#xf060;
+      button(
+        id='gs-'+form_name+'-valid'
+        onclick="GS."+form_name+".act('valid')"
+      )
+        i &#xf00c;

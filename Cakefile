@@ -156,8 +156,8 @@ compileJs = (cb) ->
   if cfg.watching
     watcher = watch {in_opts..., output: out_opts}
     watcher.on 'event', (event) ->
-      if event.code == 'ERROR' then console.log event.error
-      else if event.code == 'END' then traceExec 'coffee'
+      if event.code is 'ERROR' then console.log event.error
+      else if event.code is 'END' then traceExec 'coffee'
   else
     bundle = await rollup in_opts
     await bundle.write out_opts

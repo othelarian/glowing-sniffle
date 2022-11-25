@@ -2,6 +2,9 @@
   font-family: 'hack'
   src: url('static/hack_reg_nerdfont_complete.ttf') format("truetype")
 
+$acc_col: lightblue
+$inact_col: darkslategray
+
 body
   background: black
   margin: 0
@@ -20,8 +23,8 @@ button
   margin: 5px
 
   &:hover
-    color: lightblue
-    border-color: lightblue
+    color: $acc_col
+    border-color: $acc_col
 
 i
   font-style: normal
@@ -56,12 +59,12 @@ i
     margin: 5px auto
 
 .btn-inactive
-  color: darkslategray
-  border-color: darkslategray
+  color: $inact_col
+  border-color: $inact_col
 
   &:hover
-    color: darkslategray
-    border-color: darkslategray
+    color: $inact_col
+    border-color: $inact_col
 
 .btn-large
   width: 180px
@@ -77,9 +80,53 @@ i
   color: orange
   margin: 5px auto
 
-.line
+.icon
+  font-size: 32px
+  width: 45px
+  min-width: 45px
+
+%line-base
+  padding: 5px
+  display: flex
+  justify-content: space-between
+
+.line-c
+  @extend %line-base
+  align-items: center
+
+  button
+    min-width: 40px
+
+  .lab-switch
+    flex-grow: 2
+    text-align: left
+    margin: auto 10px
+    margin-top: 2px
+
+  .switch
+    margin-top: 2px !important
+
+.line-m
+  padding: 5px
+  display: flex
+  justify-content: center
+  border: solid 1px white
+  border-radius: 5px
+
+  label
+    text-align: left
+    margin: auto 10px
+
+.line-st
+  @extend %line-base
+  align-items: flex-start
+
   & > div
     display: inline-block
+
+  & > label
+    margin: 0
+    text-align: left
 
 .radios
   text-align: left
@@ -92,10 +139,55 @@ i
   label
     margin: 4px auto !important
 
-    & > i
+    i
       font-size: 25px
       margin-left: 6px
       margin-right: 10px
+
+.switch
+  $size: 22px
+  position: relative
+  display: inline-block
+  width: $size * 2.1
+  min-width: $size * 2.1
+  height: $size * 0.9
+  margin: $size * 0.5 !important
+  margin-top: $size * 0.6 !important
+
+  input
+    opacity: 0
+    width: 0
+    height: 0
+
+  span
+    position: absolute
+    cursor: pointer
+    top: $size * 0.5
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: $inact_col
+    border: solid 1px $inact_col
+    border-radius: $size * 0.8
+    box-sizing: border-box
+
+  span:before
+    position: absolute
+    content: ''
+    height: $size
+    width: $size
+    left: $size * -0.2
+    bottom: $size * -0.4
+    background-color: $inact_col
+    border: solid 1px white
+    border-radius: 50%
+
+  input:hover + span:before
+    background-color: $acc_col
+
+  input:checked + span:before
+    transform: translate($size * 1.17)
+    background-color: $acc_col
 
 #gs-nols
   margin: auto

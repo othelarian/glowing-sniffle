@@ -5,12 +5,18 @@ export default GSPrefs =
     switch action
       when 'curbs' then GS.show 'curbs'
       when 'main' then GS.show 'main'
+      when 'modex' then GS.prefs.modex()
       when 'reset' then GS.prefs.reset()
+  modex: ->
+    GS.config[0] = getId('gs-prefs-modex').checked
+    U.LS.set 'prefs', JSON.stringify GS.config
   normal: ->
     U.setDisplay 'gs-prefs-valid', 'none'
     U.setDisplay 'gs-prefs-main', 'block'
     GS.prefs.request = ''
-  prepare: -> GS.prefs.normal()
+  prepare: ->
+    getId('gs-prefs-modex').checked = GS.config[0]
+    GS.prefs.normal()
   request: ''
   req_cancel: -> GS.prefs.normal()
   req_valid: ->

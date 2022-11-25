@@ -1,14 +1,16 @@
 import getId, * as U from './utils.coffee'
-import {LS} from './utils.coffee'
-import {GSAdd, GSCreate} from './add.coffee'
+import {GSAdd, GSCreate, GSModex} from './add.coffee'
 import GSCurbs from './curbs.coffee'
-import {GSMain, GSCount} from './main.coffee'
+import {GSAddRep, GSAddTime, GSMain} from './main.coffee'
 import GSPrefs from './prefs.coffee'
+
+LS = U.LS
 
 GS =
   # attributes
   block: ''
-  curr: {e: []}
+  config: [false]
+  curr: {e: [], nb: 0}
   current: ''
   first: ''
   last: ''
@@ -18,14 +20,22 @@ GS =
   routes: ['curbs', 'main', 'prefs']
   # submodules
   add: GSAdd
-  count: GSCount
+  addrep: GSAddRep
+  addtime: GSAddTime
   create: GSCreate
   curbs: GSCurbs
   main: GSMain
+  modex: GSModex
   prefs: GSPrefs
   # methods
   check: ->
     LS.prop('first') and LS.prop('list') and LS.prop('values') and LS.prop('curr')
+  currinit: ->
+    GS.curr.d = GS.current
+    GS.curr.e = []
+    m = GS.list.length + 1
+    GS.curr.e.push false while m -= 1
+    GS.update 'curr'
   get: ->
     GS.current = U.date2text new Date()
     GS.first = LS.get 'first'
@@ -33,10 +43,8 @@ GS =
     GS.list_names = (e[0] for e in GS.list)
     GS.values = JSON.parse LS.get 'values'
     GS.curr = JSON.parse LS.get 'curr'
-    if GS.curr.d isnt GS.current
-      GS.curr.d = GS.curent
-      GS.curr.e = []
-      GS.update 'curr'
+    if GS.curr.d isnt GS.current then GS.currinit()
+    else GS.curr.nb = GS.curr.e.filter((e) => e).length
   init: ->
     i = U.date2text new Date()
     LS.set 'first', i
@@ -47,18 +55,13 @@ GS =
     GS.current = i
     GS.first = i
   midnight: ->
-    #
-    # TODO
-    #
-    console.log 'reaching midnight'
-    #
     GS.current = U.date2text new Date()
-    GS.curr.d = GS.current
-    GS.curr.e = []
-    GS.update 'curr'
+    GS.currinit()
     if ['add', 'main'].includes GS.last then GS[GS.last].prepare()
     GS.add.reset()
   reach: ->
+    lsp = LS.get 'prefs'
+    if lsp? then GS.config = JSON.parse lsp
     GS.block =
       if location.hash is '' then 'main'
       else

@@ -26,6 +26,7 @@ export LS =
       true
     catch
       false
+  del: (key) -> localStorage.removeItem "gs-#{key}"
   get: (key) -> localStorage.getItem "gs-#{key}"
   prop: (prop) -> localStorage.hasOwnProperty "gs-#{prop}"
   set: (key, value) -> localStorage.setItem "gs-#{key}", value

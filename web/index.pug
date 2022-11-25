@@ -1,4 +1,5 @@
 - manifest_path = pwa['short-name'] + '.webmanifest'
+- var form_name = ''
 doctype html
 html
   head
@@ -35,34 +36,8 @@ html
           i &#xf060;
         button(onclick='GS.add.act("create")')
           i &#xf067;
-        button#gs-add-valid(onclick='GS.add.act("valid")')
-          i &#xf00c;
-    #gs-create.block
-      .inblock.title Créer un exercice
-      .inblock.full
-        label(for='gs-create-name') Nom du nouvel exercice :
-        input#gs-create-name(
-          maxlength=22
-          size=25
-          oninput='GS.create.act("update")'
-        )
-        #gs-create-errdup.error Cet exercice existe déjà
-        label Type d'exercice :
-        .radios
-          input#gs-create-type-rep(name='gs-create-type',type='radio',checked)
-          label(for='gs-create-type-rep')
-            i &#xf698;
-            span répétition
-          br
-          input#gs-create-type-time(name='gs-create-type',type='radio')
-          label(for='gs-create-type-time')
-            i &#xfa1a;
-            span temps
-      .menu
-        button(onclick='GS.create.act("back")')
-          i &#xf060;
-        button#gs-create-valid(onclick='GS.create.act("create")')
-          i &#xf00c;
+    - form_name = 'create'
+    include exo_form.pug
     #gs-curbs.block
       .menu
         button(onclick='GS.curbs.act("main")')
@@ -91,6 +66,8 @@ html
       .menu
         button#gs-main-add.btn-large(onclick='GS.main.act("add")')
           i &#xf067;
+    - form_name = 'modex'
+    include exo_form.pug
     #gs-prefs.block
       .menu
         button(onclick='GS.prefs.act("main")')
@@ -98,8 +75,15 @@ html
         button(onclick='GS.prefs.act("curbs")')
           i &#xf625;
       #gs-prefs-main.inblock.full
+        div.line-st
+          label(for='gs-prefs-modex') Autoriser la modification des exercices
+          label.switch
+            input#gs-prefs-modex(type='checkbox',onchange='GS.prefs.act("modex")')
+            span
+        //
         //
         // TODO: ajouter les autres prefs (voir le coffee)
+        //
         //
         div
           button.btn-large.btn-text(onclick='GS.prefs.act("reset")') Reset app

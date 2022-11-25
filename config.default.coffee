@@ -28,7 +28,7 @@ exports.cfg =
   static: 'static'
   web:
     html:
-      src: ("#{webpath}/#{file}" for file in ['index.pug'])
+      src: ("#{webpath}/#{file}" for file in ['index.pug', 'exo_form.pug'])
       out: 'index.html'
     path: webpath
     sass:
