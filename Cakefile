@@ -6,7 +6,6 @@ fse = require 'fs-extra'
 http = require 'http'
 { extname } = require 'path'
 pug = require 'pug'
-rimraf = require 'rimraf'
 { rollup, watch } = require 'rollup'
 sass = require 'sass'
 serveStatic = require 'serve-static'
@@ -127,8 +126,7 @@ checkEnv = (options) ->
   try
     fse.accessSync cfgpath
     cfgov = require(cfgpath).cfg
-    for key, value of cfgov
-      cfg[key] = value
+    cfg[key] = value for key, value of cfgov
   cfg.envRelease = if options.release? then true else false
   cfg.watching = false
   cfg.dest = cfg.dest_path[if cfg.envRelease then 'release' else 'debug']
@@ -207,13 +205,13 @@ task_cleandesc =
 task 'clean', task_cleandesc, (options) ->
   checkEnv options
   console.log "cleaning `#{cfg.dest}`..."
-  rimraf "./#{cfg.dest}", (e) ->
+  fse.remove "./#{cfg.dest}", (e) ->
     if e? then console.log e
     else console.log "`#{cfg.dest}` removed successfully"
 
 task 'github', 'populate `docs` dir for github page', (options) ->
   checkEnv {release: true, publish: true}
-  rimraf "./#{cfg.dest}", (e) ->
+  fse.remove "./#{cfg.dest}", (e) ->
     if e? then console.log e
     else
       building (e, _) ->

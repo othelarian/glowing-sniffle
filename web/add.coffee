@@ -15,10 +15,8 @@ export GSAdd =
       it = U.createElt 'i', [], null, '&#xf448;'
       mod.append it
       nl.append mod
-    hd = U.createElt 'i', [['class', 'icon']], null, if ex[1] then '&#xf698;' else '&#xfa1a;'
-    nl.append hd
-    cp = U.createElt 'label', [['for', id], ['class', 'lab-switch']], ex[0]
-    nl.append cp
+    nl.append U.getIconElt ex[1]
+    nl.append U.createElt 'label', [['for', id], ['class', 'lab-switch']], ex[0]
     sl = U.createElt 'label', [['class', 'switch']]
     #
     # TODO: si l'exercice a déjà des répétition enregistrée, alors il l'empêcher d'être
@@ -115,7 +113,7 @@ export GSModex =
     GS.modex.ok = false
     U.setDisplay 'gs-modex-errdup', 'none'
     U.turnBtn 'gs-modex-valid', true
-    getId('gs-modex-seltype').innerHTML = (if GS.modex.base[1] then '&#xf698;' else '&#xfa1a;')
+    getId('gs-modex-seltype').innerHTML = U.getIcon GS.modex.base[1]
     getId('gs-modex-oldname').innerText = GS.modex.base[0]
     U.setDisplay 'gs-modex-radios', (if GS.modex.base[2] > 0 then 'none' else 'block')
     GS.modex.check()

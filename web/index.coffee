@@ -1,7 +1,7 @@
 import getId, * as U from './utils.coffee'
 import {GSAdd, GSCreate, GSModex} from './add.coffee'
 import GSCurbs from './curbs.coffee'
-import {GSAddRep, GSAddTime, GSMain} from './main.coffee'
+import {GSCount, GSMain} from './main.coffee'
 import GSPrefs from './prefs.coffee'
 
 LS = U.LS
@@ -20,8 +20,7 @@ GS =
   routes: ['curbs', 'main', 'prefs']
   # submodules
   add: GSAdd
-  addrep: GSAddRep
-  addtime: GSAddTime
+  count: GSCount
   create: GSCreate
   curbs: GSCurbs
   main: GSMain
@@ -96,11 +95,13 @@ GS =
   #
   # TODO
   #
-  #testa: ->
-  #  U.createElt 'p', [['id', 'plop'], ['g', 'ggg']], null, 'plap'
+  testa: (v) ->
+    U.nb2time v
   #
 
 initGlow = ->
+  if navigator.serviceWorker?
+    navigator.serviceWorker.register 'sw.js', {scope: '/glowing-sniffle/'}
   if LS.check()
     if GS.check() then GS.get() else GS.init()
     GS.reach()

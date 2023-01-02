@@ -19,7 +19,7 @@ html
       span Sniffle
     #gs-nols(style='display:none')
       h2 Oh non !
-      Malheureusement votre appareil ne supporte pas la technologie nécessaire à l'utilisation de cette app. Nous sommes sincérement désolé.
+      div Malheureusement votre appareil ne supporte pas la technologie nécessaire à l'utilisation de cette app. Nous sommes sincérement désolé.
     #gs-add.block
       .inblock.title Ajouter un exercice
       #gs-add-date.inblock ??/??/??
@@ -35,6 +35,40 @@ html
         button(onclick='GS.add.act("back")')
           i &#xf060;
         button(onclick='GS.add.act("create")')
+          i &#xf067;
+    #gs-count.block
+      .inblock.title Ajouter&nbsp;
+        span#gs-count-title-rep des réps
+        span#gs-count-title-time du temps
+      #gs-count-date.inblock ??/??/??
+      #gs-count-exo.line-m
+      #gs-count-rep.inblock.full
+        button#gs-count-rep-more(onclick='GS.count.act("repmore")')
+          i &#xf077;
+        input#gs-count-rep-inp(
+          oninput='GS.count.act("inprep")'
+          onkeyup='GS.count.act("repupdown")'
+        )
+        button#gs-count-rep-less(onclick='GS.count.act("repless")')
+          i &#xf078;
+      #gs-count-time.inblock.full
+        //
+        // TODO
+        //
+        each t in ['h', 'm', 's']
+          input(
+            id='gs-count-time-inp-'+t
+            oninput='GS.count.act("inprep")'
+            onkeyup='GS.count.act("repupdown")'
+          )
+          if t != 's'
+            span :
+        //
+        //
+      .menu
+        button(onclick='GS.count.act("back")')
+          i &#xf060;
+        button#gs-count-valid(onclick='GS.count.act("valid")')
           i &#xf067;
     - form_name = 'create'
     include exo_form.pug
@@ -60,9 +94,6 @@ html
           i &#xf061;
       #gs-main-date.inblock ??/??/??
       #gs-main-list.inblock.full main
-        //
-        // TODO
-        //
       .menu
         button#gs-main-add.btn-large(onclick='GS.main.act("add")')
           i &#xf067;
@@ -87,6 +118,7 @@ html
         //
         div
           button.btn-large.btn-text(onclick='GS.prefs.act("reset")') Reset app
+        div.version version : #{version}
       #gs-prefs-valid.inblock.full(style='display:none')
         .emph &Ecirc;tes-vous sûr de vouloir faire cette action ?
         div

@@ -12,7 +12,7 @@ exports.cfg =
     src: ["#{pwapath}/icon.pug"]
     out: "#{icndir}/icon.svg"
   pwa:
-    background_color: 'black'
+    background_color: '#000'
     description: 'Garder une trace de vos exercices physique'
     display: 'standalone'
     icon_sizes: [128, 192, 256, 512]
@@ -24,8 +24,10 @@ exports.cfg =
     service_worker: {src: "#{pwapath}/sw.coffee", out: 'sw.js'}
     'short-name': 'glowsnif'
     start_url: 'index.html'
-    theme_color: 'black'
+    theme_color: '#000'
+    scope: '/glowing-sniffle/'
   static: 'static'
+  version: '0.1.0'
   web:
     html:
       src: ("#{webpath}/#{file}" for file in ['index.pug', 'exo_form.pug'])

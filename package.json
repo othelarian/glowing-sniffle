@@ -24,7 +24,6 @@
     "connect": "^3.7.0",
     "fs-extra": "10.1.0",
     "pug": "^3.0.2",
-    "rimraf": "^3.0.0",
     "rollup": "^2.72.0",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.51.0",

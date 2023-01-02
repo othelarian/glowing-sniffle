@@ -5,6 +5,15 @@
 $acc_col: lightblue
 $inact_col: darkslategray
 
+::-webkit-scrollbar
+  width: 10px
+  background: $inact_col
+  border-radius: 5px
+
+::-webkit-scrollbar-thumb
+  border-radius: 5px
+  background: $acc_col
+
 body
   background: black
   margin: 0
@@ -26,6 +35,11 @@ button
     color: $acc_col
     border-color: $acc_col
 
+  &.value
+    width: 89px
+    height: 35px
+    font-size: 15px
+
 i
   font-style: normal
   margin-left: -5px
@@ -34,6 +48,7 @@ i
   display: none
   width: 330px
   height: calc(100vh - 55px)
+  max-height: calc(100vh - 55px)
   margin: auto
   flex-direction: column
 
@@ -42,6 +57,9 @@ i
 
     &.full
       flex-grow: 2
+      overflow: auto
+      scrollbar-color: $inact_col
+      scrollbar-width: 5px
 
     &.title
       margin: 5px auto
@@ -128,6 +146,9 @@ i
     margin: 0
     text-align: left
 
+.nothing
+  text-align: center
+
 .radios
   text-align: left
   width: fit-content
@@ -188,6 +209,49 @@ i
   input:checked + span:before
     transform: translate($size * 1.17)
     background-color: $acc_col
+
+.version
+  font-size: 12px
+  margin-top: 10px
+
+#gs-count-rep
+  margin-top: 15px
+
+  button
+    border-color: $inact_col
+    border-radius: 10px
+    width: 60px
+    background: $inact_col
+
+    &:hover
+      background: black
+      border-color: white
+
+    &:active
+      color: white
+
+    &.btn-inactive
+      background: black
+
+      &:hover
+        border-color: $inact_col
+
+      &:active
+        color: $inact_col
+
+  input
+    display: block
+    width: 100px
+    height: 40px
+    font-size: 30px
+    margin: auto
+    border-radius: 5px
+    text-align: center
+    -moz-appearance: textfield
+
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
+      -webkit-appearance: none
+      margin: 0
 
 #gs-nols
   margin: auto

@@ -14,6 +14,10 @@ export date2text = (dt) ->
   m = if m < 10 then "0#{m}" else m
   "#{m}#{d}#{y}"
 
+export getIcon = (v) -> if v then '&#xf698;' else '&#xfa1a;'
+
+export getIconElt = (v) -> createElt 'i', [['class', 'icon']], null, getIcon v
+
 export default getId = (id) -> document.getElementById id
 
 export LS =
@@ -30,6 +34,14 @@ export LS =
   get: (key) -> localStorage.getItem "gs-#{key}"
   prop: (prop) -> localStorage.hasOwnProperty "gs-#{prop}"
   set: (key, value) -> localStorage.setItem "gs-#{key}", value
+
+export nb2time = (nb) ->
+  corr = (nb) -> if nb < 10 then "0#{nb}" else nb
+  minsec = (nb, toc) ->
+    f = (nb - (nb % 60)) / 60
+    "#{if toc then corr f else f}:#{corr(nb % 60)}"
+  if nb > 3600 then "#{(nb - (nb % 3600)) / 3600}:" + (minsec (nb % 3600), true)
+  else minsec nb, false
 
 export setDisplay = (id, chx) ->
   elt = getId id
